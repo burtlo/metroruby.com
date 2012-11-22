@@ -1,0 +1,47 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= require_tree .
+ */
+ 
+@import "compass";
+@import "blueprint/grid";
+
+@import url(http://fonts.googleapis.com/css?family=Permanent+Marker|Cantarell:400,400italic);
+
+body {
+/*  background-color: #A41200;*/
+background-color: #EBE3D1;
+
+}
+
+.container {
+  margin-top: 100px;
+  font-family: 'Cantarell', sans-serif;
+  
+  .content {
+    border: 5px solid #CBC2AE;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    
+    h2 {
+      font-size: 23px;
+      font-weight: bold;
+    }
+    
+    .title {
+      font-size: 68px;
+      text-align: center;
+    }
+  }
+  
+}
+
