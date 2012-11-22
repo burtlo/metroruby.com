@@ -1,6 +1,9 @@
 Rubymetro::Application.routes.draw do
 
   root to: 'homes#index'
+
+  resources :users
+
   mount Resque::Server, :at => "/resque"
 
   # The priority is based upon order of creation:
