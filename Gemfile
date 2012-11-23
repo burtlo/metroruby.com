@@ -22,11 +22,10 @@ group :assets do
 end
 
 gem 'jquery-rails'
+gem 'minitar'
 
 gem 'resque', require: 'resque/server'
 
-gem "paperclip", "~> 3.2.0"
-gem "cocaine", "0.3.0"
 gem 'aws-sdk', '~> 1.3.4'
 
 group :test do
@@ -34,4 +33,5 @@ group :test do
   gem 'rspec-rails'
   gem 'guard'
   gem 'guard-rspec'
+  gem 'rb-fsevent'
 end

@@ -36,7 +36,6 @@ GEM
       uuidtools (~> 2.1)
     builder (3.0.4)
     chunky_png (1.2.6)
-    cocaine (0.3.0)
     coderay (1.0.8)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
@@ -88,15 +87,10 @@ GEM
       treetop (~> 1.4.8)
     method_source (0.8.1)
     mime-types (1.19)
+    minitar (0.5.4)
     multi_json (1.3.7)
     multi_xml (0.5.1)
     nokogiri (1.5.5)
-    paperclip (3.2.1)
-      activemodel (>= 3.0.0)
-      activerecord (>= 3.0.0)
-      activesupport (>= 3.0.0)
-      cocaine (>= 0.0.2)
-      mime-types
     pg (0.14.1)
     polyglot (0.3.3)
     pry (0.9.10)
@@ -128,6 +122,7 @@ GEM
       rdoc (~> 3.4)
       thor (>= 0.14.6, < 2.0)
     rake (10.0.2)
+    rb-fsevent (0.9.2)
     rdoc (3.12)
       json (~> 1.4)
     redis (3.0.2)
@@ -187,16 +182,16 @@ PLATFORMS
 
 DEPENDENCIES
   aws-sdk (~> 1.3.4)
-  cocaine (= 0.3.0)
   coffee-rails (~> 3.2.1)
   compass-rails
   guard
   guard-rspec
   haml-rails
   jquery-rails
-  paperclip (~> 3.2.0)
+  minitar
   pg
   rails (= 3.2.9)
+  rb-fsevent
   resque
   rspec
   rspec-rails

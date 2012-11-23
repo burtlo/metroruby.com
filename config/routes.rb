@@ -4,6 +4,8 @@ Rubymetro::Application.routes.draw do
 
   resources :users
 
+  resources :archive, only: [ :create ]
+
   mount Resque::Server, :at => "/resque"
 
   # The priority is based upon order of creation:
