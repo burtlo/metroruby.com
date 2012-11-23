@@ -3,15 +3,9 @@ class ArchiveController < ApplicationController
   before_filter :valid_api_key
 
   def create
-    # parse out the file
-    #  - api key
-    #  - archive file
+    save_archive unique_archive_filename, params[:file]
 
-    # validate presence of archive file and required game details
-
-    save_archive(unique_archive_filename,params[:file])
-
-    game = create_game(params[:game])
+    game = create_game params[:game]
 
     Resque.enqueue ArchiveProcessor, file: unique_archive_filename,
       game_id: game.id
@@ -22,7 +16,7 @@ class ArchiveController < ApplicationController
   private
 
   def valid_api_key
-    return false unless User.find_by_api_key(params[:api_key])
+    return false unless User.find_by_api_key params[:api_key]
   end
 
   def save_archive(filepath,file_contents)
@@ -31,7 +25,7 @@ class ArchiveController < ApplicationController
   end
 
   def create_game(game_parameters)
-    current_user.find_or_create_game(game_parameters)
+    current_user.find_or_create_game game_parameters
   end
 
   def unique_archive_filename
@@ -41,7 +35,7 @@ class ArchiveController < ApplicationController
   end
 
   def current_user
-    User.find_by_api_key(params[:api_key])
+    User.find_by_api_key params[:api_key]
   end
 
   def current_game
