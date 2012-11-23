@@ -1,6 +1,6 @@
 class ArchiveController < ApplicationController
 
-  before_filter :valid_api_key
+  before_filter :valid_api_key, :game_name_present?
 
   def create
     save_archive unique_archive_filename, params[:file]
@@ -17,6 +17,10 @@ class ArchiveController < ApplicationController
 
   def valid_api_key
     return false unless User.find_by_api_key params[:api_key]
+  end
+
+  def game_name_present?
+    params[:game] && params[:game][:name]
   end
 
   def save_archive(filepath,file_contents)
@@ -39,7 +43,7 @@ class ArchiveController < ApplicationController
   end
 
   def current_game
-    params[:game][:name] || "default_game"
+    params[:game][:name]
   end
 
 end
