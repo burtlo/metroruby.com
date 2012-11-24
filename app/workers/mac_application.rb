@@ -15,6 +15,8 @@ class MacApplication
     release = add_or_update_mac_release_for_game(game)
     release.url = url.to_s
     release.save
+
+    Resque.enqueue ArchiveCleanup, options[:cleanup]
   end
 
   def self.add_or_update_mac_release_for_game(game)

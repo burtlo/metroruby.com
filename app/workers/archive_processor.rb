@@ -6,15 +6,26 @@ class ArchiveProcessor
 
   def self.perform(options)
     options.symbolize_keys!
-    archive_filename = options.fetch(:file)
 
-    tgz = Zlib::GzipReader.new(File.open(archive_filename, 'rb'))
-  
-    root_path = File.dirname(archive_filename)
-    source_path = File.join root_path, "source"
+    archive_path = options.fetch(:file)
+    source_path = unpack_source_location archive_path
 
-    Archive::Tar::Minitar.unpack(tgz,source_path)
+    Unpacker.unpack archive_path, source_path
 
-    Resque.enqueue MacApplication, options.merge(root: root_path, source: source_path)
+    options[:cleanup] = [ archive_path, source_path ]
+
+    Resque.enqueue MacApplication, options.merge(root: File.dirname(archive_path),
+      source: source_path)
+  end
+
+  def self.unpack_source_location(path)
+    File.join File.dirname(path), "source"
+  end
+
+  class Unpacker
+    def self.unpack(source,destination)
+      tgz = Zlib::GzipReader.new File.open(source, 'rb')
+      Archive::Tar::Minitar.unpack(tgz,destination)
+    end
   end
 end
