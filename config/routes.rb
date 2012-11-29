@@ -3,6 +3,7 @@ Rubymetro::Application.routes.draw do
   root to: 'homes#index'
 
   resources :users
+  resources :games, only: [ :create ]
 
   resources :archive, only: [ :create ]
 
