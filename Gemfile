@@ -21,6 +21,7 @@ group :assets do
   gem 'compass-rails'
   gem 'haml-rails'
   gem 'uglifier', '>= 1.0.3'
+  gem 'therubyracer'
 end
 
 gem 'jquery-rails'
