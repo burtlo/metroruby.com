@@ -5,14 +5,19 @@ class AddRelease
     options.symbolize_keys!
 
     game = Game.find(options[:game_id])
-
-    release = add_or_update_release_for_platform(options[:platform])
-    release.url = url.to_s
+    url = options[:url]
+    
+    release = add_or_update_release_for_platform(game,parse_platform_name(options[:platform]))
+    release.url = url
     release.save
   end
 
-  def self.add_or_update_release_for_platform(platform_name)
-    platform = Platform.find_by_name(platform_name.to_s.capitalize)
+  def self.parse_platform_name(name)
+    { pc: 'PC', mac: 'Mac', linux: 'Linux '}[name.downcase.to_sym]
+  end
+
+  def self.add_or_update_release_for_platform(game,platform_name)
+    platform = Platform.find_by_name(platform_name)
     release = game.release_for(platform)
 
     unless release
@@ -20,10 +25,6 @@ class AddRelease
     end
 
     release
-  end
-
-  def self.target_application_path(root_path)
-    File.absolute_path(File.join(root_path, "fullgame.app"))
   end
 
 end

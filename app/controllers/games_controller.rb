@@ -1,6 +1,6 @@
 class GamesController < ApplicationController
-  
-  def create
-    render text: "Hi Tom!"
+
+  def index
+    @games = Game.all
   end
 end

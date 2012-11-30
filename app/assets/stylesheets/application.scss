@@ -8,27 +8,23 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
+ *= require blueprint
  *= require_self
  *= require_tree .
  */
- 
+
 @import url(http://fonts.googleapis.com/css?family=Permanent+Marker|Cantarell:400,400italic);
 
 body {
   background-color: #EBE3D1;
-  /*background-color: #A41200;*/
 }
 
-
 .container {
+/*  background:url('/assets/grid.png');*/
   margin: 100px auto;
   font-family: 'Cantarell', sans-serif;
-  
-  .content {
-/*    border: 5px solid #CBC2AE;*/
-/*    -moz-border-radius: 10px;*/
-/*    -webkit-border-radius: 10px;*/
 
+  .content {
     .title {
       text-align: center;
       h1 {
@@ -39,7 +35,40 @@ body {
         font-weight: bold;
       }
     }
-    
+
+    .games {
+      margin-top: 40px;
+      .title {
+        padding: 20px;
+        border-bottom: 5px solid black;
+      }
+      .game {
+        margin-top: 20px;
+        .game-title {
+          font-size: 44px;
+          a:link, a:visited {
+            text-decoration: none;
+            color: #000;
+          };
+        }
+        .game-description {
+          height: 112px;
+        }
+        .game-releases {
+          background: #eee;
+          border-radius: .3em;
+          box-shadow: rgba(#000, .15) 0 1px 4px;
+          border: #eee .5em solid;
+        }
+      }
+
+    }
+
+    .game-logo-thumbnail {
+      border-radius: .3em;
+      box-shadow: rgba(#000, .15) 0 1px 4px;
+      border: #fff .5em solid;
+    }
   }
-  
+
 }

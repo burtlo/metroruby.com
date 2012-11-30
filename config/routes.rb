@@ -1,9 +1,9 @@
 Rubymetro::Application.routes.draw do
 
-  root to: 'homes#index'
+  root to: 'games#index'
 
   resources :users
-  resources :games, only: [ :create ]
+  resources :games, only: [ :create, :show ]
 
   resources :archive, only: [ :create ]
 

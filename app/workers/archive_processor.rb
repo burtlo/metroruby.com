@@ -1,4 +1,10 @@
-require_relative '../../lib/s3_source_deliverer'
+class MacApplication
+  @queue = :mac_application_queue
+end
+
+class PCApplication
+  @queue = :pc_application_queue
+end
 
 class ArchiveProcessor
   @queue = :archive_processor_queue
@@ -6,14 +12,16 @@ class ArchiveProcessor
   def self.perform(options)
     options.symbolize_keys!
 
-    object = s3.object destination(user_name,game_name)
+    game = Game.find(options[:game_id])
+    game_id = game.id
+    game_name = game.name
+    user_name = game.user.name
+
+    object = s3_object destination(user_name,game_name)
     object.write file: options[:file]
 
-    game = Game.find(options[:game_id])
-
-    application_options = { game_name: game.name, user_name: game.user.name,
-      game_id: game.id }
-
+    application_options = { game_name: game_name, user_name: user_name,
+      game_id: game_id }
 
     Resque.enqueue MacApplication, application_options
     Resque.enqueue PCApplication, application_options
@@ -28,6 +36,8 @@ class ArchiveProcessor
   end
 
   def self.s3
+    # AWS.config access_key_id: 'AKIAINAIU7FH7K6FK6FA'
+    #   secret_access_key: '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'
     AWS::S3.new
   end
 

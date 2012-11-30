@@ -1,0 +1,11 @@
+.game.prepend-2.span-22
+  .game-logo.span-7
+    = link_to image_tag('game-logo-missing.png', class: 'game-logo-thumbnail'), game_path(game)
+  .game-details.prepend-1.span-8
+    .game-title
+      = link_to truncate(game.name, length: 128), game_path(game)
+    .game-description
+      = game.description
+    .game-releases
+      Download
+      = render partial: 'game_release', collection: game.releases
