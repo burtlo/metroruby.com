@@ -32,6 +32,8 @@ class ArchiveProcessor
   end
 
   def self.destination(user_name,game_name)
+    user_name = user_name.downcase.underscore.gsub(/\s/,'_')
+    game_name = game_name.downcase.underscore.gsub(/\s/,'_')
     File.join user_name, game_name, "archive.tar.gz"
   end
 
