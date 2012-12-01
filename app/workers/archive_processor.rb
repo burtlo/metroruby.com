@@ -38,8 +38,6 @@ class ArchiveProcessor
   end
 
   def self.s3
-    # AWS.config access_key_id: 'AKIAINAIU7FH7K6FK6FA'
-    #   secret_access_key: '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'
     AWS::S3.new
   end
 
