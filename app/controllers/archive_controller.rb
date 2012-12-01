@@ -34,7 +34,9 @@ class ArchiveController < ApplicationController
 
   def unique_archive_filename
     @archive_filename ||= begin
-      File.absolute_path File.join 'public', 'archives', current_user.name, current_game, "archive.tar.gz"
+      user_name = current_user.underscore.downcase.gsub(/\s/,'_')
+      game_name = current_game.underscore.downcase.gsub(/\s/,'_')
+      File.absolute_path File.join 'public', 'archives', user_name, game_name, "archive.tar.gz"
     end
   end
 
